@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoe Horn — Data Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0F9C8C;
+    --blue:#3B6FD1;
+    --ink:#0F1F1D;
+    --ink-soft:#3E4F49;
+    --muted:#7E8E89;
+    --paper:#FFFFFF;
+    --tint:#E4F4F1;
+    --tint-blue:#E8F1FC;
+    --border:#E6E9E7;
+    --max-w:1100px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--ink); background:var(--paper); font-size:16px; line-height:1.6;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max-w); margin:0 auto; padding:0 40px;}
+
+  nav{display:flex; justify-content:space-between; align-items:center; padding:30px 0;}
+  .logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px;}
+  .pill-nav{display:flex; gap:6px; background:var(--paper); padding:6px; border-radius:100px; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid var(--border);}
+  .pill-nav a{font-size:13px; font-weight:500; padding:8px 16px; border-radius:100px; color:var(--ink-soft);}
+  .pill-nav a:hover{color:var(--ink);}
+
+  .hero-section{background:linear-gradient(160deg,#F7FCFB 0%,#E4F4F1 45%,#E8F1FC 100%);}
+  .hero{padding:50px 0 70px;}
+  .badge{display:inline-flex; align-items:center; gap:8px; background:#fff; padding:8px 16px; border-radius:100px; font-size:13px; font-weight:500; color:var(--teal); box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:28px;}
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--teal);}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:58px; line-height:1.08; letter-spacing:-0.01em; max-width:700px;}
+  h1 span{background:linear-gradient(90deg,var(--teal),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .sub{font-size:18px; color:var(--ink-soft); margin-top:22px; max-width:560px;}
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:48px;}
+  .card{background:#fff; border-radius:16px; padding:22px; box-shadow:0 2px 12px rgba(20,40,40,0.06);}
+  .card-label{font-size:12px; color:var(--muted); font-weight:500; margin-bottom:8px;}
+  .card-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:30px;}
+  .card-unit{font-size:13px; color:var(--ink-soft); margin-top:4px;}
+
+  section{padding:70px 0;}
+  section + section{border-top:1px solid var(--border);}
+  .section-head{display:flex; align-items:baseline; gap:14px; margin-bottom:38px;}
+  .section-head .eyebrow{font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:var(--teal); letter-spacing:0.04em;}
+  .section-head h2{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:28px;}
+
+  .project-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .project-card{background:var(--paper); border:1px solid var(--border); border-radius:16px; padding:28px; transition:box-shadow 0.2s ease, transform 0.2s ease;}
+  .project-card:hover{box-shadow:0 6px 24px rgba(20,40,40,0.08); transform:translateY(-2px);}
+  .project-card h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; margin-bottom:10px;}
+  .project-card p{color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-size:11.5px; font-weight:600; padding:5px 11px; border-radius:100px;}
+  .tag.teal{background:var(--tint); color:var(--teal);}
+  .tag.blue{background:var(--tint-blue); color:var(--blue);}
+
+  .exp-item{display:grid; grid-template-columns:150px 1fr; gap:0 28px; padding:28px 0; border-top:1px solid var(--border);}
+  .exp-item:first-of-type{border-top:none; padding-top:0;}
+  .exp-date{font-size:13px; color:var(--muted); font-weight:500; padding-top:4px;}
+  .exp-item h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px; margin-bottom:4px;}
+  .exp-org{font-size:13.5px; color:var(--teal); font-weight:600; margin-bottom:12px;}
+  .exp-item ul{margin-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .exp-item li{margin-bottom:6px;}
+  .exp-item .tag-row{margin-top:14px;}
+
+  @media (max-width:600px){
+    .exp-item{grid-template-columns:1fr;}
+    .exp-date{margin-bottom:6px;}
+    .project-grid{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+    h1{font-size:40px;}
+  }
+
+  .about-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:40px;}
+  .about-grid p{color:var(--ink-soft); margin-bottom:16px;}
+  .edu-card{background:var(--tint-blue); border-radius:16px; padding:24px;}
+  .edu-card h4{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; margin-bottom:6px;}
+  .edu-card .edu-sub{font-size:13.5px; color:var(--ink-soft); margin-bottom:14px;}
+  .edu-stats{display:flex; gap:24px; margin-bottom:14px;}
+  .edu-stat-num{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; color:var(--blue);}
+  .edu-stat-label{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em;}
+  .award-line{font-size:13px; color:var(--ink-soft); padding-top:12px; border-top:1px solid rgba(0,0,0,0.06); margin-top:4px;}
+  .award-line strong{color:var(--ink);}
+  .footnote{font-size:13px; color:var(--muted); margin-top:24px;}
+
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:28px;}
+  .skill-group h4{font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:600; color:var(--teal); margin-bottom:12px; letter-spacing:0.03em;}
+  .skill-group .tag-row{margin-top:0;}
+
+  footer{padding:64px 0 80px;}
+  footer h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:32px; margin-bottom:14px;}
+  footer p{color:var(--ink-soft); max-width:50ch; margin-bottom:28px;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:14px;}
+  .contact-pill{display:inline-flex; align-items:center; gap:8px; background:var(--tint); color:var(--teal); font-weight:600; font-size:14px; padding:11px 20px; border-radius:100px;}
+  .contact-pill.blue{background:var(--tint-blue); color:var(--blue);}
+  .contact-pill.dark{background:var(--ink); color:#fff;}
+
+  .reveal{opacity:0; transform:translateY(10px); transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
+</style>
+</head>
+<body>
+
+<div class="hero-section">
+  <div class="wrap">
+    <nav>
+      <div class="logo">Zoe Horn</div>
+      <div class="pill-nav">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="badge"><span class="dot"></span>Open to marketing & data analytics roles</div>
+      <h1>Turning data into <span>decisions people trust.</span></h1>
+      <p class="sub">Data Analytics student at USC (GPA 3.98) blending statistical rigor with visual storytelling — from Tableau dashboards to stakeholder-ready insights.</p>
+      <div class="cards">
+        <div class="card"><div class="card-label">JHU Survey Analysis</div><div class="card-num">5,000+</div><div class="card-unit">survey responses analyzed</div></div>
+        <div class="card"><div class="card-label">Recruitment Analytics</div><div class="card-num">2,502</div><div class="card-unit">candidates matched</div></div>
+        <div class="card"><div class="card-label">Academics</div><div class="card-num">3.98</div><div class="card-unit">GPA at USC</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section id="work" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">01</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Navigating the U.S. Housing Market Through Data</h3>
+        <p>An interactive Tableau Story analyzing U.S. housing market trends and regional price patterns to surface affordability insights for a general audience.</p>
+        <div class="tag-row">
+          <span class="tag teal">Tableau</span>
+          <span class="tag blue">Data Storytelling</span>
+        </div>
+        <div style="margin-top:14px; font-family:'Space Grotesk',sans-serif; font-size:13px;">
+          <a href="https://public.tableau.com/shared/XRCYX8RSC?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" style="color:var(--teal); font-weight:600;">View on Tableau Public →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Mental Health & Social Media Balance</h3>
+        <p>A multivariate study, using a Kaggle dataset, analyzing the impact of social media use on mental wellbeing — applying clustering and factor analysis to reveal latent patterns in the data.</p>
+        <div class="tag-row">
+          <span class="tag teal">R</span>
+          <span class="tag blue">Multivariate Statistics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">02</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jun–Jul 2026</div>
+      <div>
+        <h3>NSF REU Researcher</h3>
+        <div class="exp-org">University of South Carolina, Dept. of Mathematics · Columbia, SC</div>
+        <ul>
+          <li>Selected for an NSF-funded Research Experience for Undergraduates in the Mathematical Foundations of Data Science</li>
+          <li>Analyze large, high-dimensional genomic datasets in R, applying clustering and trajectory modeling to extract meaningful patterns from noisy data</li>
+          <li>Present findings weekly to faculty and research teams, translating technical results for a broader audience</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag teal">R</span>
+          <span class="tag blue">Statistical Modeling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May–Jun 2025</div>
+      <div>
+        <h3>Data Analytics Project Intern</h3>
+        <div class="exp-org">Johns Hopkins University · Baltimore, MD</div>
+        <ul>
+          <li>Analyzed institutional survey datasets (5,000+ responses) to identify trends relevant to university decision-making</li>
+          <li>Cleaned and processed institutional survey data for analysis</li>
+          <li>Designed infographics translating findings for non-technical stakeholders</li>
+          <li>Wrote an executive-style summary distilling data insights into clear takeaways</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag teal">Excel</span>
+          <span class="tag blue">Canva</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Dec 2025–Present</div>
+      <div>
+        <h3>Technology Coordinator</h3>
+        <div class="exp-org">Kappa Kappa Gamma · Columbia, SC</div>
+        <ul>
+          <li>Oversee the full recruitment analytics process, supervising the matching team and ensuring accuracy across all selection decisions</li>
+          <li>Coordinate with the Panhellenic Council on compliance with recruitment policies</li>
+          <li>Manage the technical and operational systems behind the recruitment process to maintain data integrity</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag teal">Omega Recruit</span>
+          <span class="tag teal">Campus Director</span>
+          <span class="tag blue">Google Sheets</span>
+          <span class="tag blue">Excel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Dec 2024–Dec 2025</div>
+      <div>
+        <h3>Head of Matching Committee</h3>
+        <div class="exp-org">Kappa Kappa Gamma · Columbia, SC</div>
+        <ul>
+          <li>Led a four-person team managing recruitment matching during Fall 2025 (2,502 participants — one of the largest Panhellenic recruitments nationally)</li>
+          <li>Analyzed recruitment data to guide selection decisions and align candidates with organizational values</li>
+          <li>Oversaw a high-volume matching system producing a 180-member pledge class under strict deadlines</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag teal">Omega Recruit</span>
+          <span class="tag teal">Campus Director</span>
+          <span class="tag blue">Google Sheets</span>
+          <span class="tag blue">Excel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">03</span>
+      <h2>About & Education</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Data Analytics student at the University of South Carolina with a Business Administration minor and a certificate in Data Analytics & Visualization. I was the first-ever recipient of the John M. Grego Data Analytics Award, presented by USC's Data Science and Data Analytics Program. I also use AI tools like Claude and Gemini to speed up data cleaning, exploratory analysis, and code development.</p>
+        <p>Alongside coursework and research, I've spent the last several years working in service roles — serving, hosting, and as a barista — which is where I first built the people skills and pace-under-pressure instincts I now bring to analytics work.</p>
+        <div class="footnote">Spring 2026: studied abroad in Madrid, Spain through the Institute for American Universities (Spanish Civilization & Culture).</div>
+      </div>
+      <div class="edu-card">
+        <h4>University of South Carolina</h4>
+        <div class="edu-sub">B.S. Data Analytics · Minor, Business Administration · Certificate, Data Analytics & Visualization</div>
+        <div class="edu-stats">
+          <div><div class="edu-stat-num">3.98</div><div class="edu-stat-label">GPA</div></div>
+          <div><div class="edu-stat-num">2027</div><div class="edu-stat-label">Expected grad</div></div>
+        </div>
+        <div class="award-line"><strong>John M. Grego Data Analytics Award</strong> — first recipient, 2026</div>
+        <div class="award-line">Departmental & University Scholarship recipient</div>
+        <div class="award-line">President's List (4 semesters) · Dean's List (Fall 2025)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">04</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Programming</h4>
+        <div class="tag-row">
+          <span class="tag teal">Python</span>
+          <span class="tag teal">R</span>
+          <span class="tag teal">SQL</span>
+          <span class="tag teal">Java</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Analysis</h4>
+        <div class="tag-row">
+          <span class="tag blue">Statistical Analysis</span>
+          <span class="tag blue">Data Visualization</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <div class="tag-row">
+          <span class="tag teal">Tableau</span>
+          <span class="tag teal">Excel</span>
+          <span class="tag teal">GitHub</span>
+          <span class="tag teal">Canva</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="reveal">
+    <h2>Let's talk</h2>
+    <p>I'm looking for marketing analytics and data analytics roles where I can pair statistical rigor with clear, visual communication. Reach out — I'd love to hear from you.</p>
+    <div class="contact-row">
+      <a class="contact-pill dark" href="mailto:zoe.f.horn@gmail.com">zoe.f.horn@gmail.com</a>
+      <a class="contact-pill" href="tel:+14438473005">+1 443 847 3005</a>
+      <a class="contact-pill blue" href="https://www.linkedin.com/in/zoe-horn" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="contact-pill" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
